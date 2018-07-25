@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    
+	<meta charset="UTF-8">
+	<title>Samarth Wellness Detector</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	
+	<div class="form-style-2">
+	<div class="form-style-2-heading">Hello!! It is Samarth's AI based Wellness Detector</div>
+		
+		<form id="upload-form" action="{{url_for('upload') }}"   method="POST" enctype="multipart/form-data" >
+				<label for="field1"><span>Upload Image </span><input type="file" name="file" accept="image/*" multiple>
+				<label><span>&nbsp;</span><input type="submit" value="send"/><label>
+		</form>
+	
+	</div>
+</body>
+
+</html>
