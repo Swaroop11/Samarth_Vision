@@ -1,24 +1,134 @@
-<!DOCTYPE html>
-
 <html lang="en">
 <head>
-    
-	<meta charset="UTF-8">
-	<title>Samarth Wellness Detector</title>
-	<link href="style.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Samarth AI based Wellness Detector</title>
 </head>
-
 <body>
-	
-	<div class="form-style-2">
-	<div class="form-style-2-heading">Hello!! It is Samarth's AI based Wellness Detector</div>
-		
-		<form id="upload-form" action="{{url_for('upload') }}"   method="POST" enctype="multipart/form-data" >
-				<label for="field1"><span>Upload Image </span><input type="file" name="file" accept="image/*" multiple>
-				<label><span>&nbsp;</span><input type="submit" value="send"/><label>
-		</form>
-	
-	</div>
-</body>
+<div class="root">
+  <div class="SCheader"><img src={{url_for('static', filename = 'logo.png')}}/>
+  </div>
+  <div class="section1">
 
+  <div class="SCsubhead">Wellness Detector
+  </div>
+  <center>
+  <div class="content">
+    <form id = "upload-form" action="{{url_for('upload') }}" method="POST" enctype="multipart/form-data">
+      <div>
+<div class="image" ><img src="{{url_for('static', filename = 'images/'+filename)}}" class="imgdis"></div>
+    </div>
+      <br>
+      <br>
+      <br>
+      <!--<button type="button" name="button" >Predict</button> => -->
+
+      <div class="buttn_up">
+      <p class="results">Wellness of the person: {{ well *100 }} %</p>
+      <p class="results">Unwellness of the person: {{ unwell *100 }} %</p>
+      </div>
+    </form>
+  </div></center>
+  </div>
+<div class="section2">
+<div class="image" ><img src="{{url_for('static', filename = 'old1.jpg')}}" class="imgdis" /> <div>Perdicted value = 70.8% Wellness</div></div>
+<div class="image" ><img src="{{url_for('static', filename = 'old2.jpg')}}" class="imgdis" /> <div>Perdicted value = 75.2% Wellness</div></div>
+<div class="image" ><img src="{{url_for('static', filename = 'old3.jpg')}}" class="imgdis" /> <div>Perdicted value = 65.5% Unwellness</div></div>
+<div class="image" ><img src="{{url_for('static', filename = 'old4.jpg')}}" class="imgdis" /> <div>Perdicted value = 74.5% Unwellness</div></div>
+</div>
+
+
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+<style>
+.root{
+  width:100%;
+display: inline-block;
+background-image: url({{url_for('static', filename = 'samarth_background.jpg')}});
+height: 100vh;
+background-size: 100vw 100vh;
+}
+.section1{
+  width:50%;
+background-color: rgba(242,101,34,0.6);
+color:white;
+display:inline-block;
+margin-left: 30px;
+margin-top: 50px;
+}
+
+.SCheader{
+  width:100%;
+
+  background-color:rgba(255,255,255);
+  border-radius:6px;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+
+}
+
+.SCsubhead{
+
+  margin-top: 30px;
+padding: 10px;
+padding-left: 40px;
+
+  border-bottom: solid 2px;
+  border-radius:6px;
+
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.section2{
+  background-color:rgba(0,125,198,0.6);
+position: absolute;
+width: 30%;
+padding-left: 30px;
+padding-right: 30px;
+padding-top: 30px;
+padding-bottom: 10px;
+display: inline-block;
+margin-left: 50px;
+margin-top: 10px;
+}
+
+.image{
+  margin-top: 20px;
+  border-radius: 5px;
+  width:200px;
+  height:200px;
+  background:  grey;
+  display: inline-block;
+
+
+}
+
+.imgdis{
+  width: inherit;
+  height: inherit;
+}
+.buttn_up{
+  background-color: rgba(0,0,0,0.8);
+  padding:10px 20px 10px 20px;
+}
+
+.results{
+  font-size: 20px;
+  font-weight: bold;
+
+}
+</style>

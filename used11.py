@@ -7,7 +7,7 @@ from __future__ import print_function
 import logging
 import random
 import time
-import os 
+import os
 from flask import Flask, jsonify, request, render_template
 
 import numpy as np
@@ -15,6 +15,7 @@ import tensorflow as tf
 
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 print(APP_ROOT)
 
 def load_graph(model_file):
@@ -56,22 +57,22 @@ def index():
 
 @app.route("/upload",methods=['POST'])
 def upload():
-    target = os.path.join(APP_ROOT, 'images/')
+    target = os.path.join(APP_ROOT, 'static\\images\\')
     print(target)
-   
+
     if not os.path.isdir(target):
         os.mkdir(target)
 
     for file in request.files.getlist('file'):
        print(file)
        filename = file.filename
-       destination = "/".join([target, filename])
+       destination = "".join([target, filename])
        print(destination)
        file.save(destination)
-	
+
     file_name = destination
     print(file_name)
-    
+
 	#file_name = request.args['file']
 
     t = read_tensor_from_image_file(file_name,
@@ -79,7 +80,7 @@ def upload():
                                   input_width=input_width,
                                   input_mean=input_mean,
                                   input_std=input_std)
-        
+
     with tf.Session(graph=graph) as sess:
         start = time.time()
         results = sess.run(output_operation.outputs[0],
@@ -94,13 +95,13 @@ def upload():
 
     for i in top_k:
          print(labels[i], results[i])
-    
+
     unwell = results[0]
-    print("unwellness of person is : " ,unwell)
+    print("Unwellness of person is : " ,unwell)
     well = results[1]
-    print("wellness of person is : " ,well)
-	
-    return render_template("complete.html" ,well = well, unwell = unwell)
+    print("Wellness of person is : " ,well)
+    print(destination)
+    return render_template("complete.html" ,well = well, unwell = unwell,filename=filename)
 
 
 if __name__ == '__main__':
@@ -125,4 +126,4 @@ if __name__ == '__main__':
 
     # Initialize the Flask Service
     # Obviously, disable Debug in actual Production
-    app.run(debug=True, port=8000)	#Debug =False in true production
+    app.run(debug=False, port=8080)	#Debug =False in true production
